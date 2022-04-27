@@ -1,0 +1,79 @@
+<!-- CSS -->  
+<style>
+    div{
+        margin: 0 auto;
+        float: none;
+        text-align: center;
+    }
+    #confirm {
+        width: auto;
+        height: 200px;
+        display:block;
+        margin:auto;
+    }
+</style>
+
+
+<!-- INICIO FORMULARIO BIBLIOTECA-->  
+{{ form_start(form) }}
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.nombre) }}
+    {{ form_widget(form.nombre, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.num_trabajadores) }}
+    {{ form_widget(form.num_trabajadores, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.direccion) }}
+    {{ form_widget(form.direccion, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.fecha_fundacion) }}
+    {{ form_widget(form.fecha_fundacion, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+    {{ form_widget(form) }}
+<div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary">
+        <a class="bi bi-arrow-down-left-circle-fill text-light" href="{{ path('app_biblioteca_index') }}">  Atrás</a>
+    </button>
+</div>
+
+<!-- Botón Guardar -->  
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <a class="bi bi-save2 text-light"></a>
+    Guardar
+</button>
+
+<!-- Modal Confirmación De Creación -->  
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Todo Correcto</h5>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <img id="confirm" src="https://imagizer.imageshack.com/v2/xq90/922/FrMAvl.png ">
+                <br>
+                <p>Si no hay ningún error se creara la biblioteca.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success">{{ button_label|default('Confirmar') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
+<!-- FIN FORMULARIO -->  

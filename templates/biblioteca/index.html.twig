@@ -1,0 +1,1013 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotecas{% endblock %}
+
+{% block body %}
+<!-- css -->  
+    <style>
+        html{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .text-center{
+            text-align: center;
+        }
+        .clear::after{
+            content: "";
+            clear: left;
+            display: block;
+        }
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
+        body{
+            color: black;
+            text-align: center;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header{
+            color: black;
+        }
+        #headimg{
+            background: url(https://i.pinimg.com/originals/45/df/1d/45df1dc455006110f0023815fd0d8c5d.gif);
+            background-size: cover;
+            padding: 5%;
+        }
+
+        /*Sección Sobre Nosotros */
+        .banner-bottom {
+            margin-top: 50px;
+            margin-bottom: 0%;
+        }
+        .vedio-left{
+            width: 45%;
+        }
+        .vedio-content{
+            width: 50%;
+        }
+        .vedio-content h2{
+            font-size: 60px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .vedio-content p{
+            color: #767676;
+            font-size: 24px;
+            margin-top: 55px;
+        }
+
+
+        /* Sección Servicios */
+        .service-section{
+            margin-top: 80px;
+            background: #fff;
+        }
+        .service-title{}
+        .service-title h2{
+            font-size: 60px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .service-title p{
+            font-size: 25px;
+            color: #767676;
+        }
+        
+
+        /* Servicios caja y mensaje */
+        .serviceBox{
+            color: #777;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+        .serviceBox .service-icon{
+            color: #0098e5;
+            background: #fff;
+            font-size: 70px;
+            line-height: 115px;
+            height: 120px;
+            width: 120px;
+            margin: 0 auto 15px;
+            border: 3px solid #0098e5;
+            border-right-color: transparent;
+            border-radius: 100%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transform: rotate(45deg);
+        }
+        .serviceBox .service-icon span{
+            display: block;
+            transform: rotate(-45deg);
+        }
+        .serviceBox .service-content{
+            background-color: #fff;
+            padding: 30px 20px;
+            border-radius: 150px/50px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .serviceBox .title{
+            color: #0098e5;
+            font-size: 23px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: capitalize;
+            margin: 0 0 7px;
+        }
+        .serviceBox .description{
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            line-height: 23px;
+            margin: 0;
+        }
+        .serviceBox.red .service-icon{
+            color: #CD283E;
+            border-color: #CD283E;
+            border-right-color: transparent;
+        }
+        .serviceBox.red .title{ color: #CD283E; }
+        .serviceBox.yellow .service-icon{
+            color: #FD7B19;
+            border-color: #FD7B19;
+            border-right-color: transparent;
+        }
+        .serviceBox.yellow .title{ color: #FD7B19; }
+        .serviceBox.blue .service-icon{
+            color: #122984;
+            border-color: #122984;
+            border-right-color: transparent;
+        }
+        .serviceBox.blue .title{ color: #122984; }
+        @media only screen and (max-width: 990px){
+            .serviceBox{ margin: 0 0 40px; }
+        }
+
+
+        /* Sección Nuestro Equipo */
+        .team{
+            margin:40px;
+        }
+
+        .team h4{
+            font-size: 30px;
+            color:#000000 ;
+        }
+
+        .teamp p{
+            font-size: 15px;
+            color:#767676;
+        }   
+
+        .team-member {
+            margin: 15px 0;
+            padding: 0;
+        }
+
+        .team-member figure {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .team-member figure img {
+            min-width: 100%;
+        }
+
+        .team-member figcaption p {
+            font-size: 16px;
+        }
+
+        .team-member figcaption ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .team-member figcaption ul {
+            visibility: visible;
+            -webkit-transition: all 0.1s ease-in-out;
+            -moz-transition: all 0.1s ease-in-out;
+            -o-transition: all 0.1s ease-in-out;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .team-member figcaption ul li {
+            display: inline-block;
+            padding: 10px;
+        }
+
+        .team-member h4 {
+            margin: 10px 0 0;
+            padding: 0;
+        }
+
+        .team-member figcaption {
+            padding: 50px;
+            color: transparent;
+            background-color: transparent;
+            position: absolute;
+            z-index: 996;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .team-member figure:hover figcaption {
+            visibility: visible;
+            color: #fff;
+            background: rgba(196, 195, 195, 0.9);
+            height: 100%;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .team-member figure:hover figcaption ul li a:hover {
+            color: #7B8080;
+        }
+
+        .team-member figure img {
+            -webkit-transform: scale(1) rotate(0) translateY(0);
+            -moz-transform: scale(1) rotate(0) translateY(0);
+            -o-transform: scale(1) rotate(0) translateY(0);
+            -ms-transform: scale(1) rotate(0) translateY(0);
+            transform: scale(1) rotate(0) translateY(0);
+            -webkit-transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+            -o-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .team-member figure:hover img {
+            -webkit-transform: scale(1.1) rotate(1deg) translateY(12px);
+            -moz-transform: scale(1.1) rotate(1deg) translateY(12px);
+            -o-transform: scale(1.1) rotate(1deg) translateY(12px);
+            -ms-transform: scale(1.1) rotate(1deg) translateY(12px);
+            transform: scale(1.1) rotate(1deg) translateY(12px);
+            -webkit-transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+            -o-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+        }
+
+        /* Sección Contrataciones y Ofertas */
+        .pricing-table-section{
+            background: #FFFFFF;
+        }
+        .pricing-table-title{
+            text-align: center;
+            padding: 36px 0;
+        }
+        .pricing-table-title h2{
+            font-size: 60px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .pricing-table-title p{
+            font-size: 25px;
+            color: #767676;
+        }
+
+        .table-item{
+            width: 26%;
+            margin-right: 3%;
+            margin-left: 4%;
+            background-color: white;
+            box-shadow: 3px 4px 40px 0 rgba(57, 86, 214,.1);
+            margin-top: 40px;
+        }
+        .table-item:nth-child(3){
+            margin-right: 0;
+        }
+        .t-header{
+            padding: 30px;
+            border-bottom: 1px solid #ddd;
+            transition: .3s;
+        }
+        .t-header:hover{
+            color: #fff;
+            background: #302E2E;
+        }
+        .t-header h4{
+            font-size: 30px;
+            font-weight: 500;
+        }
+        .t-header h1{
+            font-size: 50px;
+            margin: 40px 0;
+        }
+        .t-header h1 span{
+            font-size: 20px;
+        }
+        .t-header h5{
+            font-size: 23px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .t-header p{
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 60px;
+        }
+
+        .t-content{
+            padding: 30px;
+        }
+        .t-content ul{
+            list-style: none;
+        }
+        .t-content ul li{
+            text-align:center;
+            margin: 30px 0;
+            margin-right: 20px;
+            font-size: 25px;
+            font-weight: 400;
+            color: #767676;
+        }
+        .t-content ul li span{
+            color: rgba(0, 0, 0, 0.904);
+            font-size: 30px;
+            width: 60px;
+            display: inline-block;
+        }
+        .p-botton .default-btn{
+            color:#000000;
+            box-shadow: 3px 4px 40px 0 rgba(57, 86, 214,.3);
+        }
+
+        /* Sección Contactanos Footer */
+        .contact {
+            padding: 50px 0 50px;
+            overflow: hidden;
+            background-color: #3F5267;
+            color: #FFF
+        }
+
+        .contact .contact-box {
+            float: left;
+            width: 30%;
+            margin-right: 3.33333%
+        }
+
+        .contact .contact-box:last-of-type { margin:0 }
+
+        .contact .contact-box:nth-child(2) { margin-left: 2% }
+
+        .contact .contact-box h2 {
+            margin: 0;
+            font-size: 25px
+        }
+
+        .contact .contact-box p {
+            text-align: justify;
+            font-size: 15px;
+            line-height: 1.8
+        }
+
+        .contact .contact-box > div {
+            margin: 20px 0;
+        }
+        .contact .contact-box > div i {
+            margin-right: 20px;
+            color: #1FB5F6;
+        }
+        .contact .contact-box .connect { margin-top: 40px}
+
+        .contact .contact-box .connect ul { margin-top: 20px }
+
+        .contact .contact-box .connect ul li  { display: inline-block; margin-right: 5px }
+
+        .contact .contact-box .connect ul li i {cursor: pointer; transition: all .5s ease-in-out;}
+
+        .contact .contact-box .connect ul li:hover  i { color: #FFF}
+
+        .contact .contact-box form input, textarea {
+            display: block;
+            width: 400px;
+            height: 35px;
+            padding: 10px;
+            border: 5px solid #FFFFFF;
+            border-radius:10px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .contact .contact-box form input:first-child {
+            margin-top: 20px
+        }
+
+        .contact .contact-box form textarea {
+            height: 200px
+        }
+
+        .contact .contact-box form button {
+            display: block;
+            margin: 30px 0 0 80px;
+            width: 150px;
+            height: 40px;
+            border: 1px solid #6173f4;
+            background-color: #6173f4;
+            color: #FFF;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 1s ease-in-out
+        }
+
+        .contact .contact-box form button:hover {
+            background: #393E46;
+            border: 1px solid #393E46;
+        }
+
+        /* Sección Footer */
+        footer {
+            padding: 20px 0 30px;
+            text-align: center;
+            background-color: #3F5267;
+            color: #FFF
+        }
+
+
+        section#contact {
+            background-color: #222;
+            background-image: url(https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        section#contact .section-heading {
+            color: #000000;
+            font-size: 60px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        section#contact .form-group {
+            margin-bottom: 25px;
+        }
+
+        section#contact .form-group input,
+        section#contact .form-group textarea {
+            padding: 20px;
+        }
+
+        section#contact .form-group input.form-control {
+            height: auto;
+        }
+
+        section#contact .form-group textarea.form-control {
+            height: 236px;
+        }
+
+        section#contact .form-control:focus {
+            border-color: #1ee2e7;
+            box-shadow: none;
+        }
+
+        section#contact::-webkit-input-placeholder {
+            text-transform: uppercase;
+            font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 700;
+            color: #bbb;
+        }
+
+        section#contact:-moz-placeholder {
+            text-transform: uppercase;
+            font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 700;
+            color: #bbb;
+        }
+
+        section#contact::-moz-placeholder {
+            text-transform: uppercase;
+            font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 700;
+            color: #bbb;
+        }
+
+        section#contact:-ms-input-placeholder {
+            text-transform: uppercase;
+            font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 700;
+            color: #bbb;
+        }
+
+        section#contact .text-danger {
+            color: #e74c3c;
+        }
+        a:link,
+        a:active,
+        a:visited{
+            color:rgba(255,255,255,1);
+        }
+
+        a:hover{
+            color:rgba(255,255,255,0.6);
+        }
+
+        .gray {
+            color: #a5a5a5;
+        }
+        tfoot {
+            display: table-header-group;
+        }
+        .dataTables_filter {
+            display: none;
+        }
+
+    </style>
+
+    <!-- Script Datatable-->
+    <script>
+        $(document).ready(function() {
+            // Setup - add a text input to each footer cell
+            $('#datatablee tfoot th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
+            } );
+
+            // DataTable
+            var table = $('#datatablee').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                },
+                initComplete: function () {
+                    // Apply the search
+                    this.api().columns([0,1,2]).every( function () {
+                        var that = this;
+
+                        $('input', this.footer() ).on( 'keyup change clear', function () {
+                            if ( that.search() !== this.value ) {
+                                that
+                                    .search( this.value )
+                                    .draw();
+                            }
+                        } );
+                    } );
+                }
+            });
+
+        } );
+    </script>
+
+<!-- INICIO Header -->
+<header>
+    <div id="headimg" class="jumbotron bg-cover text-white">
+        <div class="container py-5 text-center">
+            <br>
+            <h1  class="display-4 font-weight-bold">𝓑𝓲𝓫𝓵𝓲𝓸𝓽𝓮𝓬𝓪𝓼</h1>
+            <p  class="font-italic mb-0"><h5>Repartidas por toda España.</h5></p>
+            <p>
+            <p class="font-italic">
+            <h5>También con una Sección De Libros</h5>
+            </p>
+            <br>
+            <!-- Botón ir a la sección libros -->
+            <a href="/libro" role="button" class="btn btn-dark px-5">Ir a Los Libros</a>
+            <br><br>
+        </div>
+    </div>
+</header>
+<!-- FIN header -->
+
+<!-- INICIO body -->
+<body>
+    <!-- Datatable Lista Bibliotecas -->
+    <div class="container-md">
+        <br><br>
+        <div class="service-section clear">
+            <div class="fixed-width">
+                <div class="service-title text-center">
+                    <h2>Lista De Bibliotecas</h2>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <table id="datatablee" class="table table-striped" style="width:100%">
+            <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Num Trabajadores</th>
+            </tr>
+
+            </tfoot>
+            </tr>
+
+            <thead>
+                <tr>
+                    <th>ID Biblioteca</th>
+                    <th>Nombre</th>
+                    <th>Número De trabajadores</th>
+                    <th>Dirección</th>
+                    <th>Fecha Fundación</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for biblioteca in bibliotecas %}
+                <tr>
+                    <td>{{ biblioteca.id }}</td>
+                    <td>{{ biblioteca.nombre }}</td>
+                    <td>{{ biblioteca.numTrabajadores }}</td>
+                    <td>{{ biblioteca.direccion }}</td>
+                    <td>{{ biblioteca.fechaFundacion ? biblioteca.fechaFundacion|date('Y-m-d') : '' }}</td>
+
+                    <!-- Botones de Accciones -->
+                    <td>
+                        <button type="button" class="btn btn-secondary">
+                            <a class="bi bi-card-list text-light" href="{{ path('app_biblioteca_show', {'id': biblioteca.id}) }}">  Mostrar</a>
+                        </button>
+                        <button type="button" class="btn btn-secondary">
+                            <a class="bi bi-brush text-light" href="{{ path('app_biblioteca_edit', {'id': biblioteca.id}) }}">  Editar</a>
+                        </button>
+                        <button type="button" class="btn btn-secondary">
+                            <a class="bi bi-book text-light" href="{{ path('app_biblioteca_libros', {'id': biblioteca.id}) }}"> Libros</a>
+                        </button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">No Hay Resultados</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+                <br>
+            <a href="{{ path('app_biblioteca_new') }}"class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Crear Biblioteca</a>
+        <br><br>
+        <hr><br>
+
+
+        <!-- SECCIÓN Sobre Nosotros -->
+        <div class="banner-bottom clear">
+            <div class="fixed-width">
+                <div class="vedio-left left">
+
+                    <!-- Vídeo -->
+                    <iframe width="610" height="410" src="https://www.youtube.com/embed/wJo2_aQ7vMs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="vedio-content right">
+                    <h2>Sobre Nosotros</h2>
+                    <p>Ponemos a disposición de nuestros usuarios la Biblioteca Virtual; en donde ofrece los servicios de búsqueda, localización y recuperación de información de documentos en texto completo en formato electrónico y referencias bibliográficas, mediante el uso del Catálogo en Línea y la consulta de bases de datos tanto de acceso libre como controlado.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <hr>
+        <!-- FIN Sobre Nosotros -->
+        
+        <!-- INICIO Sección Servicios -->
+        <div class="service-section clear">
+            <div class="fixed-width">
+                <div class="service-title text-center">
+                    <h2>Servicios</h2>
+                    <p>Ofrecremos muchos servicios pero los principales son:</p>
+                    <br>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="serviceBox">
+                                <div class="service-icon">
+                                    <span><i class="fa fa-globe"></i></span>
+                                </div>
+                                <div class="service-content">
+                                    <h3 class="title">Multi-Idioma</h3>
+                                    <p class="description">Un mismo libro lo tenemos en varios idiomas, siempre y cuando haya una licencia y una editorial apta para la traducción.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="serviceBox red">
+                                <div class="service-icon">
+                                    <span><i class="fa fa-rocket"></i></span>
+                                </div>
+                                <div class="service-content">
+                                    <h3 class="title">Envios Internacionales</h3>
+                                    <p class="description">No solo nacional si no que también hay envíos a todas partes del mundo, cuando sea posible y haya distribuidores disponibles al país al que se envía.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="serviceBox yellow">
+                                <div class="service-icon">
+                                    <span><i class="fa fa-mobile"></i></span>
+                                </div>
+                                <div class="service-content">
+                                    <h3 class="title">App Móvil</h3>
+                                    <p class="description">En un futuro se plantea sacar una app donde se pueda buscar los libros y las bibliotecas que desees, así como compras o alquiler.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="serviceBox blue">
+                                <div class="service-icon">
+                                    <span><i class="fa fa-briefcase"></i></span>
+                                </div>
+                                <div class="service-content">
+                                    <h3 class="title">Profesionalidad y Confianza</h3>
+                                    <p class="description">Siempre priorizaremos tu pedido y el trato al cliente, por ello tenemos un número de atención al cliente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><hr>
+
+        <!-- INICIO SECCIÓN Ubicación  -->
+        <div class="service-section clear">
+            <div class="fixed-width">
+                <div class="service-title text-center">
+                    <h2>Ubicaciones</h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Mapa -->
+        <iframe src="https://www.google.com/maps/d/embed?mid=1BqOJhkOHDbzrjBY0LJQ1a-Qv7AIIjkRQ&ehbc=2E312F" width="1300" height="480"  frameborder="0" style="border:0"  allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <br><br><br><br><br><br><hr>
+        <!-- FIN Ubicación -->
+        
+        <!-- INICIO Sección Nuestro Equipo -->
+        <br><br><br>
+        <div class="fixed-width">
+            <div class="service-title text-center">
+                <h2>Nuestro Equipo</h2>
+            </div>
+        </div>
+        <section id="team" class="team content-section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="team-member">
+                                    <figure>
+                                        <img src="https://imagizer.imageshack.com/v2/xq90/923/OFN2CI.png" alt="" class="img-responsive">
+                                        <figcaption>
+                                            <p>Fundadora principal de BibliotecasEsT</p>
+                                            <ul>
+                                                <li><a href="https://es-es.facebook.com/"><i class="fa fa-facebook fa-2x"></i></a></li>
+                                                <li><a href="https://twitter.com/?lang=es"><i class="fa fa-twitter fa-2x"></i></a></li>
+                                                <li><a href="https://es.linkedin.com/"><i class="fa fa-linkedin fa-2x"></i></a></li>
+                                            </ul>
+                                        </figcaption>
+                                    </figure>
+                                    <h4>Laura Martínez</h4>
+                                    <p>Directora de biblioteca</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="team-member">
+                                    <figure>
+
+                                        <img src="https://imagizer.imageshack.com/v2/xq90/923/lyMQAL.png" alt="" class="img-responsive">
+                                        <figcaption>
+                                            <p>Con un equipo a su cargo, se encarga de controlar que no haya ninguna incidencia en cada área de la biblioteca. </p>
+                                            <ul>
+                                                <li><a href="https://es-es.facebook.com/"><i class="fa fa-facebook fa-2x"></i></a></li>
+                                                <li><a href="https://twitter.com/?lang=es"><i class="fa fa-twitter fa-2x"></i></a></li>
+                                                <li><a href="https://es.linkedin.com/"><i class="fa fa-linkedin fa-2x"></i></a></li>
+                                            </ul>
+                                        </figcaption>
+                                    </figure>
+                                    <h4 >José Luis García</h4>
+                                    <p> Jefe de área</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="team-member">
+                                    <figure>
+                                        <img src="https://imagizer.imageshack.com/v2/xq90/922/8we2mV.png" alt="" class="img-responsive">
+                                        <figcaption>
+                                            <p>Técnico principal de la biblioteca encargado de todo el sistema de cableados eléctricos y mantenimiento electrónico.</p>
+                                            <ul>
+                                                <li><a href="https://es-es.facebook.com/"><i class="fa fa-facebook fa-2x"></i></a></li>
+                                                <li><a href="https://twitter.com/?lang=es"><i class="fa fa-twitter fa-2x"></i></a></li>
+                                                <li><a href="https://es.linkedin.com/"><i class="fa fa-linkedin fa-2x"></i></a></li>
+                                            </ul>
+                                        </figcaption>
+                                    </figure>
+                                    <h4 >Francisco Javier Carrión</h4>
+                                    <p>Técnico de biblioteca</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br><br><br><hr>
+    </div>
+    <!-- FIN Sección Equipo -->
+
+    <!-- INICIO Sección Contrátaciones y Ofertas  -->
+    <div class="pricing-table-section">
+        <div class="fixed-width">
+            <div class="pricing-table-title">
+                <h2>Contrataciones y Ofertas</h2>
+                <p>Ofrecemos desde una versión gratuita para estudiante hasta ofertas para empresas.</p>
+            </div>
+            <div class="pricing-table clear">
+                <div class="table-item left">
+                    <div class="t-header">
+                        <h4>Versión Gratuita</h4>
+                        <h1> 0 € <span>/ mes</span></h1>
+                        <h5>¿Qué ofrece esta versión?</h5>
+                        <p>Dirigida para estudiantes y usuarios regulares.</p>
+                    </div>
+                    <div class="t-content">
+                        <ul>
+                            <li><span><i class="fa fa-check"></i></span> Tiempo Limitado (30 días)</li>
+                            <li><span><i class="fa fa-check"></i></span> Usuarios Limitados</li>
+                            <li><span><i class="fa fa-times"></i></span> Envíos Gratuitos</li>
+                            <li><span><i class="fa fa-times"></i></span> Pedidos Ilimitados</li>
+                            <li><span><i class="fa fa-times"></i></span> Prioridad</li>
+                        </ul>
+                        <div class="p-batton">
+                        <button type="button" class="btn btn-outline-dark btn-lg">
+                            Comenzar Prueba Gratuita
+                        </button>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="table-item left">
+                    <div class="t-header">
+                        <h4>Versión Pro</h4>
+                        <h1> 10 € <span>/ mes</span></h1>
+                        <h5>¿Qué ofrece esta versión?</h5>
+                        <p>Dirigida a usuarios habituales que la usan constantemente.</p>
+                    </div>
+                    <div class="t-content">
+                        <ul>
+                            <li><span><i class="fa fa-check"></i></span> Tiempo Ilimitado</li>
+                            <li><span><i class="fa fa-check"></i></span> Prioridad</li>
+                            <li><span><i class="fa fa-check"></i></span> Envíos Gratuitos</li>
+                            <li><span><i class="fa fa-check"></i></span>  Pedidos Ilimitados</li>
+                            <li><span><i class="fa fa-times"></i></span>  Multiples Usuarios</li>
+                        </ul>
+                        <div class="p-batton">
+                        <button type="button" class="btn btn-outline-dark btn-lg">
+                            Comprar Versión Pro
+                        </button>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="table-item left">
+                    <div class="t-header">
+                        <h4>Versión Para Empresas</h4>
+                        <h1> 30 € <span>/ mes</span></h1>
+                        <h5>¿Qué ofrece esta versión?</h5>
+                        <p>Dirigida a empresas que deseen usar nuestros servicios.</p>
+                    </div>
+                    <div class="t-content">
+                        <ul>
+                            <li><span><i class="fa fa-check"></i></span> Tiempo Ilimitado</li>
+                            <li><span><i class="fa fa-check"></i></span> Prioridad</li>
+                            <li><span><i class="fa fa-check"></i></span> Envíos Gratuitos</li>
+                            <li><span><i class="fa fa-check"></i></span> Pedidos Ilimitados</li>
+                            <li><span><i class="fa fa-check"></i></span>  Multiples Usuarios</li>
+                        </ul>
+                        <div class="p-batton">
+                        <button type="button" class="btn btn-outline-dark btn-lg">
+                            Comprar Versión Para Empresas
+                        </button>
+                       </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <!-- FIN Contrataciones y Ofertas -->
+
+    <!-- INICIO Sección Contacto -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <br><br>
+                    <h2 class="section-heading">Contáctanos</h2>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="sentMessage" id="contactForm" novalidate="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Nombre" id="name" required="" data-validation-required-message="Introduzca su nombre.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Email" id="email" required="" data-validation-required-message="Introduzca sui email.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Número de Tlf." id="phone" required="" data-validation-required-message="Introduzca su teléfono.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Mensaje" id="message" required="" data-validation-required-message="Introduzca un mensaje."></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <br>
+                                <button type="submit" class="btn btn-info btn-lg">Enviar Mensaje</button>
+                                <br><br>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+    <!-- FIN Contacto -->
+
+    <!-- INICIO Footer -->
+    <div class="clearfix"></div>
+    <section id="contacto" class="contact">
+        <div class='container'>
+            <div class="contact-box">
+                <h4>Sobre Nosotros</h4>
+                <br>
+                <p>
+                    Ofrecemos los servicios de búsqueda, localización y recuperación de información de documentos en texto completo en formato electrónico y referencias bibliográficas
+                </p>
+            </div>
+            <div class="contact-box">
+                <h2>Dirección</h2>
+                <div>
+                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                    <span> C. de la Fuente, 41940 Tomares, Sevilla (España)</span>
+                </div>
+                <div>
+                    <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+                    <span>+34 655 98 64 75</span>
+                </div>
+                <div>
+                    <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>
+                    <a>jlgarciabibliotecas@bebeyond.com</a>
+                </div>
+                <div>
+                    <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
+                    <a>www.bibliotecaest.com</a>
+                </div>
+
+            </div>
+            <div class="connect">
+                <h3>Conócenos</h3>
+                <br>
+                <ul>
+                    <i class="fa fa-facebook fa-lg" aria-hidden="true"> BibliotecaEsT</i>
+                    <br><br>
+
+                    <i class="fa fa-twitter fa-lg" aria-hidden="true"> @bibliotecaEsT</i>
+                    <br><br>
+                    <i class="fa fa-google-plus fa-lg" aria-hidden="true"> Biblioteca EST</i>
+                    <br><br>
+
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <span>2022 CopyRight &copy;  All Right Reversed </span>
+        </div>
+    </footer>
+<!-- FIN Footer -->
+</body>
+<!-- FIN Body -->
+{% endblock %}
+

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista De Libros{% endblock %}
+{% block body %}
+
+<!-- CSS -->
+<style>
+    html{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .text-center{
+        text-align: center;
+    }
+    .clear::after{
+        content: "";
+        clear: left;
+        display: block;
+    }
+    .left{
+        float: left;
+    }
+    .right{
+        float: right;
+    }
+    body{
+        color: black;
+        text-align: center;
+        min-height: 100vh;
+    }
+</style>
+
+<!-- INICIO Body -->
+<body>
+    <!-- INICIO Lista Libros De Cada Biblioteca -->
+    <div class="container-md">
+        <br><br>
+        <div class="service-section clear">
+            <div class="fixed-width">
+                <div class="service-title text-center">
+                    <h1>Lista De Libros De {{ biblioteca.nombre}}</h1>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <table id="example" class="table table-striped" style="width:100%">
+
+             <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>Título:</th>
+                    <th>Autor:</th>
+                    <th>Biblioteca:</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for libro in biblioteca.libroid %}
+                <tr>
+                    <td>{{ libro.id }}</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor}}</td>
+                    <td>{{ biblioteca.nombre}}</td>
+
+                    <!--  -->
+                    <td>
+                        <button type="button" class="btn btn-secondary">
+                             <a class="bi bi-card-list text-light" href="{{ path('app_libro_show', {'id': libro.id}) }}"> Datos</a>
+                        </button>
+                        <button type="button" class="btn btn-secondary">
+                            <a class="bi bi-brush text-light" href="{{ path('app_libro_edit', {'id': libro.id}) }}"> Editar</a>
+                        </button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Esta biblioteca no tiene libros.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+                <br>
+
+            <button type="button" class="btn btn-secondary btn-lg">
+                <a class="bi bi-arrow-down-left-circle-fill text-light" href="{{ path('app_biblioteca_index') }}">  Atrás</a>
+            </button>
+        <br><br>
+    <body>
+    <!-- FIN Lista Libros -->
+    <!-- FIN Body -->
+{% endblock %}

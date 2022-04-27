@@ -1,0 +1,47 @@
+<!-- CSS -->  
+<style>
+    #wearing {
+        width: auto;
+        height: 200px;
+        display:block;
+        margin:auto;
+    }
+    p{
+        font-size: 20px;
+    }
+</style>
+
+<!--INICIO Botón Eliminar -->
+<button type="button" class="btn btn-danger text-center" data-bs-toggle="modal" data-bs-target="#elimiModal">
+  <a class="bi bi-x-octagon text-light"></a>
+    Eliminar
+</button>
+
+<!-- Modal Aviso Eliminar -->
+<div class="modal fade" id="elimiModal" tabindex="-1" aria-labelledby="elimiModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="elimiModalLabel">¿Seguro que desea eliminar esta biblioteca?</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <img id="wearing" src="https://media.istockphoto.com/vectors/hazard-sign-icon-vector-triangle-vector-id1218892695?k=20&m=1218892695&s=612x612&w=0&h=LEKcMxSTRVw01MJzL-7laAHiOFfspO1xSmos1uKz-j4=" >
+                <br>
+                <p>No se podrá recuperar una vez se elimine, así como todos sus libros.</p>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+            <form method="post" action="{{ path('app_biblioteca_delete', {'id': biblioteca.id}) }}">
+                <input action="{{ path('app_biblioteca_delete', {'id': biblioteca.id}) }}" type="hidden" name="_token" value="{{ csrf_token('delete' ~ biblioteca.id) }}">
+                <button class="btn btn-danger text-center">
+                    <a class="bi bi-x-octagon text-light"></a>
+                    Eliminar
+                </button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN Botón ELiminar -->  

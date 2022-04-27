@@ -1,0 +1,95 @@
+<!-- CSS -->
+<style>
+    div{
+        margin: 0 auto;
+        float: none;
+        text-align: center;
+    }
+    #confirm {
+        width: auto;
+        height: 200px;
+        display:block;
+        margin:auto;
+    }
+</style>
+
+<!-- Formulario -->
+{{ form_start(form) }}
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.biblioteca) }}
+    {{ form_widget(form.biblioteca, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.titulo) }}
+    {{ form_widget(form.titulo, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.autor) }}
+    {{ form_widget(form.autor, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.tipo) }}
+    {{ form_widget(form.tipo, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.fecha_publicacion) }}
+    {{ form_widget(form.fecha_publicacion, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+<div class="col-lg-4 col-lg-offset-4 ">
+    {{ form_label(form.ejemplares) }}
+    {{ form_widget(form.ejemplares, {'attr':
+        {'class' : 'form-control'}
+    }) }}
+</div>
+<br>
+{{ form_widget(form) }}
+
+<!-- Botón Guardar y Atrás -->
+<div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary">
+        <a class="bi bi-arrow-down-left-circle-fill text-light" href="{{ path('app_libro_index') }}">  Atrás</a>
+    </button>
+    <p></p>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <a class="bi bi-save2 text-light"></a>
+        Guardar
+    </button>
+</div>
+
+<!-- Modal Confirmación de Guardado -->
+<div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Todo Correcto</h5>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <img id="confirm" src="https://imagizer.imageshack.com/v2/xq90/922/FrMAvl.png ">
+                    <br>
+                    <p>Si no hay ningún error se añadirá el libro.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success">{{ button_label|default('Confirmar') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+</div>
+{{ form_end(form) }}

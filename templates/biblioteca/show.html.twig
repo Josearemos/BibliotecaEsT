@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BibliotecaEsT{% endblock %}
+
+{% block body %}
+<!-- CSS -->
+    <style>
+        body{
+            text-align: justify-all;
+
+        }
+        tr{
+            text-align: center;
+        }
+        .card {
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 10px;
+        }
+    </style>
+
+<!-- INICIO Body -->
+    <body>
+        <br>
+        <!-- INICIO Ver Datos Biblioteca -->
+        <div class="card border-secondary mb-3 " style="max-width: 40rem;">
+            <div class="card-header h2 text-center">
+                Datos De La Biblioteca
+            </div>
+            <br>
+            <table class="table table-striped ">
+                <tbody>
+                    <tr>
+                        <th>ID:</th>
+                        <td>{{ biblioteca.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>{{ biblioteca.nombre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Número De Trabajadores:</th>
+                        <td>{{ biblioteca.numTrabajadores }}</td>
+                    </tr>
+                    <tr>
+                        <th>Dirección:</th>
+                        <td>{{ biblioteca.direccion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha Fundación:</th>
+                        <td>{{ biblioteca.fechaFundacion ? biblioteca.fechaFundacion|date('Y-m-d') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Botones De Acción -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary">
+                    <a class="bi bi-arrow-down-left-circle-fill text-light" href="{{ path('app_biblioteca_index') }}">  Atrás</a>
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <a class="bi bi-brush text-light" href="{{ path('app_biblioteca_edit', {'id': biblioteca.id}) }}">  Editar</a>
+                </button>
+
+                {{ include('biblioteca/_delete_form.html.twig') }}
+            </div>
+        </div>
+        <!-- FIN Ver Datos Biblioteca -->
+    </body>
+    <!-- FIN Body -->
+{% endblock %}
+

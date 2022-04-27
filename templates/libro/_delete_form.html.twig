@@ -1,0 +1,46 @@
+<!-- CSS -->
+<style>
+    #wearing {
+        width: auto;
+        height: 200px;
+        display:block;
+        margin:auto;
+    }
+    p{
+        font-size: 20px;
+    }
+</style>
+
+<!-- Botón Eliminar -->
+<button type="button" class="btn btn-danger text-center" data-toggle="modal" data-target="#Modal1">
+    <a class="bi bi-x-octagon text-light"></a>
+    Eliminar
+</button>
+
+<!-- Modal Aviso Eliminar -->
+<div class="modal fade bd-example-modal-lg" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">¿Seguro que desea eliminar esta biblioteca?</h5>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <img id="wearing" src="https://media.istockphoto.com/vectors/hazard-sign-icon-vector-triangle-vector-id1218892695?k=20&m=1218892695&s=612x612&w=0&h=LEKcMxSTRVw01MJzL-7laAHiOFfspO1xSmos1uKz-j4=" >
+                <br>
+                <p>No se podrá recuperar una vez se elimine, así como todos sus libros.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <form method="post"  action="{{ path('app_libro_delete', {'id': libro.id}) }}">
+                    <input  type="hidden" name="_token" value="{{ csrf_token('delete' ~ libro.id) }}">
+
+                    <button class="btn btn-danger text-center">
+                        <a class="bi bi-x-octagon text-light"></a>
+                        Eliminar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

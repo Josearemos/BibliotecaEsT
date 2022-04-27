@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Libro{% endblock %}
+
+{% block body %}
+    <!-- CSS -->
+    <style>
+        .card {
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+
+<!-- Editar Datos Libro -->    
+<br>
+<div class="card border-secondary mb-3 " style="max-width: 40rem;">
+    <div class="card-header h2 text-center">Editar Libro</div>
+    <br>
+    {{ include('libro/_form.html.twig', {'button_label': 'Actualizar'}) }}
+    <div>
+        <p></p>
+    {{ include('libro/_delete_form.html.twig') }}
+        <p></p>
+    </div>
+</div>
+{% endblock %}
